@@ -85,11 +85,6 @@ int main(int argc, char** argv) {
     double fps = input.get(cv::CAP_PROP_FPS); 
     cv::Size frameSize(frame_width, frame_height); 
     cv::VideoWriter videoWriter(outputVideoPath, fourcc, fps, frameSize);
-
-    if (!input.isOpened()) {
-        cout << "无法打开视频文件: " << videoPath << endl;
-        return -1;
-    }
     cv::Mat frame;
     int frameCount = 0;
     while (true) {
