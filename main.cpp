@@ -84,7 +84,7 @@ int main(int argc, char** argv) {
     double frame_height = input.get(cv::CAP_PROP_FRAME_HEIGHT);
     double fps = input.get(cv::CAP_PROP_FPS); 
     cv::Size frameSize(frame_width, frame_height); 
-    cv::VideoWriter videoWriter(outputVideoPath, fourcc, fps, frameSize);
+    cv::VideoWriter videoWriter(outputVideoPath, fourcc, fps/3, frameSize);
     cv::Mat frame;
     int frameCount = 0;
     while (true) {
@@ -128,6 +128,10 @@ int main(int argc, char** argv) {
                             cv::Point(int(endpoints[i+1].x + 0.5), int(endpoints[i+1].y + 0.5)) 
                         };
                         cv::polylines(frame, endpoints_int, true, cv::Scalar(255, 0, 0), 1);
+                        if(endpoints[i].x > endpoints[j].x){
+                            swap(endpoints[i],endpoints[j]);
+                            swap(endpoints[i+1],endpoints[j+1]);
+                        }
                         std::vector<cv::Point2f> armorPoints = {
                             endpoints[i],    
                             endpoints[j],    
